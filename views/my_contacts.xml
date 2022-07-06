@@ -30,6 +30,8 @@
                     <button type="object" name="open_commercial_entity"
                                 string="Open commercial partner"
                         class="btn-primary" />
+                    <button type="action" name='%(base.action_partner_category_form)d'
+                    string='Open Partner Categories'/>
                 </header>
                 
                 <label for="name" class="oe_edit_only"/>
