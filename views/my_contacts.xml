@@ -1,6 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
+    <record id='view_all_contacts_search' model='ir.ui.view'>
+        <field name='model'>res.partner</field>
+        <field name='arch' type='xml'>
+            <search>
+                <field name="name" />
+                <field name="category_id" filter_domain="[('category_id', 'child_of', self)]" />
+                <field name="bank_ids" widget="many2one" />
+                <filter name="suppliers" string="Suppliers" domain="[('supplier_rank', '>', 0)]" />
+                <group expand="0" string="Group By">
+                    <filter string="Country" name="country" context="{'group_by':'country_id'}"/>
+                </group>
+<!--                <searchpanel>-->
+<!--                    <field name="user_id" icon="fa fa-users"/>-->
+<!--                    <field name="category_id" select="multi" icon="fa fa-list"/>-->
+<!--                    <field name="type" icon="fa fa-list"/>-->
+<!--                </searchpanel>-->
+            </search>
+        </field>
+    </record>
+
+    <record id='action_all_contacts_search' model='ir.actions.act_window'>
+        <field name='name'>All Contacts</field>
+        <field name='res_model'>res.partner</field>
+        <field name='view_mode'>tree,form</field>
+        <field name='search_view_id' ref='view_all_contacts_search'/>
+    </record>
+
     <record id='view_all_contacts_tree' model='ir.ui.view'>
         <field name='model'>res.partner</field>
         <field name='arch' type='xml'>
@@ -66,7 +93,7 @@
         </field>
     </record>
 
-    <record id='action_all_customers' model='ir.actions.act_window'>
+    <record id='action_all_customers_form' model='ir.actions.act_window'>
         <field name="name">All customers</field>
         <field name="res_model">res.partner</field>
         <field name="view_mode">tree,form</field>
@@ -75,6 +102,6 @@
     </record>
 
     <menuitem id="menu_custom_top_level" name="My App menu" web_icon="my_module,static/description/icon.png"/>
-    <menuitem id="menu_all_customers" parent="menu_custom_top_level" action="action_all_customers" sequence="10" />
+    <menuitem id="menu_all_customers" parent="menu_custom_top_level" action="action_all_customers_form" sequence="10" />
     <menuitem id='menu_all_contacts_tree' parent="menu_custom_top_level" action="action_all_contacts_tree" sequence="10" />
 </odoo>
