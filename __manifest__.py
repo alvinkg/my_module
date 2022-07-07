@@ -7,7 +7,7 @@
     'website': "www.konvergenttech.com",
     'category': "Uncategorized",
     'version': "14.0.1",
-    'depends': ['base', 'account'],
+    'depends': ['base', ], #'account'
     'data': [
         'views/my_contacts.xml',
         # 'views/my_contacts_fr.xml',
