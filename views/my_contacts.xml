@@ -1,6 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
+    <record id="view_partner_form" model="ir.ui.view">
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <field name="website" position="after">
+                <field name="write_date"/>
+            </field>
+            <field name="email" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_res_partner_filter" model="ir.ui.view">
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="." position="inside">
+                <field name="mobile"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_partner_tree" model="ir.ui.view">
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree" />
+        <field name="arch" type="xml">
+            <field name="display_name" position="after">
+                <field name="phone" position="move"/>
+            </field>
+             <field name="country_id" position="replace">
+                <field name="lang"/>
+            </field>
+        </field>
+    </record>
+
+    <record id='action_all_contacts' model='ir.actions.act_window'>
+        <field name="name">All Contacts</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
     <record id='view_all_contacts_search' model='ir.ui.view'>
         <field name='model'>res.partner</field>
         <field name='arch' type='xml'>
@@ -12,10 +54,10 @@
                 <group expand="0" string="Group By">
                     <filter string="Country" name="country" context="{'group_by':'country_id'}"/>
                 </group>
-                <searchpanel>-->
+                <searchpanel>
                    <field name="user_id" icon="fa fa-users"/>
-                   <field name="category_id" select="multi" icon="fa fa-list"/>
-                   <field name="type" icon="fa fa-list"/>
+                   <field name="category_id" select="multi" icon="fa fa-bitcoin"/>
+                   <field name="type" icon="fa fa-money"/>
                 </searchpanel>
             </search>
         </field>
@@ -103,5 +145,6 @@
 
     <menuitem id="menu_custom_top_level" name="My App menu" web_icon="my_module,static/description/icon.png"/>
     <menuitem id="menu_all_customers" parent="menu_custom_top_level" action="action_all_customers_form" sequence="10" />
-    <menuitem id='menu_all_contacts_tree' parent="menu_custom_top_level" action="action_all_contacts_tree" sequence="10" />
+    <menuitem id='menu_all_contacts_tree' parent="menu_custom_top_level" action="action_all_contacts_tree" sequence="20" />
+    <menuitem id='menu_all_contacts' parent="menu_custom_top_level" action="action_all_contacts" sequence="30" />
 </odoo>
