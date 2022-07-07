@@ -74,6 +74,7 @@
         <field name="sequence" eval="2"/>
     </record>
 
+
     <!-- alternative way of act_window -->
     <!-- <record id='action_all_customers' model='ir.actions.act_window'>
         <field name="name">All customers</field>
