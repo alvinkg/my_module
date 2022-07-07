@@ -10,6 +10,7 @@
     'depends': ['base', 'account'],
     'data': [
         'views/my_contacts.xml',
+        # 'views/my_contacts_fr.xml',
     ],
     'application': True,
     'sequence': 0,
